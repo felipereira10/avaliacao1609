@@ -24,11 +24,13 @@ public class TrabalhoController {
     @Autowired
     private TrabalhoService service;
 
+    // Endpoint para buscar todos os trabalhos 1 ponto
     @GetMapping
     public ResponseEntity<List<Trabalho>> buscarTodos() {
         return ResponseEntity.ok().body(service.buscarTodos());
     }
     
+    // Endpoint para cadastrar um novo trabalho 2 pontos
     @PostMapping
     public ResponseEntity<Trabalho> cadastrarNovo(@RequestBody Trabalho trabalho) {
         trabalho = service.novoTrabalho(trabalho);
@@ -37,8 +39,11 @@ public class TrabalhoController {
             .body(trabalho);
     }
 
+    // Endpoint para buscar trabalhos por título e nome do usuário 3 pontos
     @GetMapping(value = "/tituloNomeUsuario")
-    public ResponseEntity<List<Trabalho>> buscarPorTituloENomeUsuario(@RequestParam("titulo") String titulo, @RequestParam("nome") String nomeUsuario) {
+    public ResponseEntity<List<Trabalho>> buscarPorTituloENomeUsuario(
+        @RequestParam("titulo") String titulo,
+        @RequestParam("nome") String nomeUsuario) {
         return ResponseEntity.ok().body(service.buscarPorTituloENomeUsuario(titulo, nomeUsuario));
     }
 }
