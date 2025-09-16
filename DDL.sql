@@ -1,3 +1,13 @@
+create table his_historico (
+  his_id bigint generated always as identity,
+  his_aut_nome_antigo varchar(20) not null,
+  his_aut_nome_novo varchar(20) not null,
+  his_data date not null,
+  his_autorizacao bigint not null,
+  his_alcance float,
+  foreign key (his_autorizacao) references aut_autorizacao (aut_id) on delete restrict on update cascade
+);
+
 create table usr_usuario (
   usr_id bigint generated always as identity,
   usr_nome varchar(20) not null,
@@ -52,6 +62,9 @@ insert into ant_anotacao(ant_texto, ant_data_hora, ant_usr_id)
 insert into tra_trabalho (tra_titulo, tra_data_hora_entrega, tra_nota, tra_usr_id)
   values ('Teste 1', current_timestamp, 6, 1),
          ('Teste 2', current_timestamp, null, 1);
+insert into his_historico (his_aut_nome_antigo, his_aut_nome_novo, his_data, his_autorizacao, his_alcance)
+  values ('ROLE_ROOT', 'ROLE_ADMIN', '2025-09-03', 1, 0.73),
+         ('ROLE_USER', 'ROLE_GERAL', current_date, 1, null);
 
 create user spring with password 'postgres';
 
